@@ -7,10 +7,9 @@ class IsSubscribedMixin:
         if user.is_anonymous:
             return False
         return user.subscriber.filter(author=obj.id).exists()
-    
+
 
 class ListRetrieveViewSet(mixins.ListModelMixin,
                           mixins.RetrieveModelMixin,
                           viewsets.GenericViewSet):
     pass
-   

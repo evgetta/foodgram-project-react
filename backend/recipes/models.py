@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+from .validators import is_hex_validator
+
 User = get_user_model()
 
 
@@ -62,7 +64,7 @@ class Tag(models.Model):
     )
     color = models.CharField(
         verbose_name='Цвет тега',
-        max_length=8,
+        max_length=7,
         unique=True,
     )
     slug = models.SlugField(
@@ -77,7 +79,11 @@ class Tag(models.Model):
         ordering = ('id',)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name}, {self.color}'
+
+    def clean(self):
+        self.color = is_hex_validator(self.color)
+        return super().clean()
 
 
 class Ingredient(models.Model):
@@ -115,7 +121,8 @@ class AmountOfIngredients(models.Model):
     amount = models.PositiveSmallIntegerField(
         verbose_name='Количество',
         validators=[
-            MinValueValidator(1, 'Количество ингредиентов не менее 1')
+            MinValueValidator(1, 'Количество ингредиентов не менее 1'),
+            MaxValueValidator(32, 'Ингредиентов слишком много')
         ]
     )
 

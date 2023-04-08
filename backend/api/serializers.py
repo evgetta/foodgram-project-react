@@ -5,12 +5,12 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from django.contrib.auth import get_user_model
 
 from users.models import Subscription
-from recipes.models import (Ingredient, Recipe, Tag, AmountOfIngredients, 
+from recipes.models import (Ingredient, Recipe, Tag, AmountOfIngredients,
                             FavoritesList, ShoppingCart)
 from .mixins import IsSubscribedMixin
 
 User = get_user_model()
-  
+
 
 class UserCreateSerializer(UserCreateSerializer):
     email = serializers.EmailField(
@@ -33,7 +33,7 @@ class UserSerializer(IsSubscribedMixin, UserSerializer):
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email',
                   'is_subscribed')
-    
+
 
 class SubRecipeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,7 +41,7 @@ class SubRecipeSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'image', 'cooking_time')
 
 
-class SubscriptionSerializer(IsSubscribedMixin, 
+class SubscriptionSerializer(IsSubscribedMixin,
                              serializers.ModelSerializer):
     id = serializers.ReadOnlyField(source='author.id')
     email = serializers.ReadOnlyField(source='author.email')
@@ -98,7 +98,7 @@ class CheckSubscribeSerializer(serializers.ModelSerializer):
                     {'errors': 'Ошибка, вы уже отписались'}
                 )
         return obj
-    
+
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -190,7 +190,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             else:
                 ingredients_set.append(ingredient['id'])
         return value
-    
+
     def validate_tags(self, value):
         if len(value) != len(set(value)):
             raise serializers.ValidationError(
@@ -258,7 +258,8 @@ class FavoritesListSerializer(serializers.ModelSerializer):
     def validate(self, data):
         user = data['user']
         recipe_id = data['recipe'].id
-        if FavoritesList.objects.filter(user=user, recipe__id=recipe_id).exists():
+        if FavoritesList.objects.filter(user=user,
+                                        recipe__id=recipe_id).exists():
             raise serializers.ValidationError('Рецепт уже в избранном')
         return data
 

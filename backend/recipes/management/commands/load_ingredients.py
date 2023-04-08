@@ -7,7 +7,7 @@ from recipes.models import Ingredient
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
-            with open('./data/ingredients.csv', 'r', 
+            with open('./data/ingredients.csv', 'r',
                       encoding='utf-8') as file:
                 reader = DictReader(file)
                 Ingredient.objects.bulk_create(

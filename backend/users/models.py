@@ -30,4 +30,4 @@ class Subscription(models.Model):
         ]
 
     def __str__(self):
-        return f'Подписчик {self.user.username} на автора {self.author.username}'
+        return f'{self.user.username} подписан на {self.author.username}'

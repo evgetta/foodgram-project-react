@@ -30,15 +30,15 @@ class IngredientAdmin(ModelAdmin):
 
 
 @register(AmountOfIngredients)
-class LinksAdmin(ModelAdmin):
+class AmountOfIngredientsAdmin(ModelAdmin):
     pass
 
 
 @register(FavoritesList)
-class LinksAdmin(ModelAdmin):
+class FavoritesListAdmin(ModelAdmin):
     pass
 
 
 @register(ShoppingCart)
-class LinksAdmin(ModelAdmin):
+class ShoppingCartAdmin(ModelAdmin):
     pass
