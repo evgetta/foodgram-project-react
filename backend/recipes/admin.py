@@ -1,7 +1,7 @@
-from django.contrib.admin import (register, ModelAdmin)
+from django.contrib.admin import ModelAdmin, register
 
-from .models import (Recipe, Tag, Ingredient, AmountOfIngredients,
-                     FavoritesList, ShoppingCart)
+from .models import (AmountOfIngredients, FavoritesList, Ingredient, Recipe,
+                     ShoppingCart, Tag)
 
 EMPTY_VALUE = 'Пустое значение'
 
