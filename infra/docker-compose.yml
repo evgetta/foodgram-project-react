@@ -16,11 +16,6 @@ services:
   backend:
     image: evgetta/foodgram_back:v1.0
     restart: always
-    command: >
-      bash -c "python manage.py migrate &&
-      python manage.py collectstatic --noinput &&
-      python manage.py load_ingredients &&
-      python manage.py load_tags"
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
