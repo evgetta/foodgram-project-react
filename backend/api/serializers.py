@@ -134,7 +134,9 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = fields = ('id', 'tags', 'author', 'ingredients',
+                           'is_favorited', 'is_in_shopping_cart',
+                           'name', 'image', 'text', 'cooking_time')
 
     def get_ingredients(self, obj):
         ingredients = AmountOfIngredients.objects.filter(recipe=obj)
@@ -175,8 +177,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = '__all__'
-        read_only_fields = ('author',)
+        fields = ('id', 'tags', 'author', 'ingredients',
+                  'name', 'image', 'text', 'cooking_time')
 
     def validate_ingredients(self, value):
         ingredients_set = []
