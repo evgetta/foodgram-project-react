@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='AmountOfIngredients',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(1, 'Количество ингредиентов не менее 1'), django.core.validators.MaxValueValidator(32, 'Ингредиентов слишком много')], verbose_name='Количество')),
+                ('amount', models.PositiveSmallIntegerField(validators=[django.core.validators.MinValueValidator(1, 'Количество ингредиентов не менее 1'), django.core.validators.MaxValueValidator(6400, 'Ингредиентов слишком много')], verbose_name='Количество')),
             ],
             options={
                 'verbose_name': 'Количество ингредиентов',

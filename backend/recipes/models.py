@@ -122,7 +122,7 @@ class AmountOfIngredients(models.Model):
         verbose_name='Количество',
         validators=[
             MinValueValidator(1, 'Количество ингредиентов не менее 1'),
-            MaxValueValidator(32, 'Ингредиентов слишком много')
+            MaxValueValidator(6400, 'Ингредиентов слишком много')
         ]
     )
 

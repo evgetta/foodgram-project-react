@@ -189,6 +189,9 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             if ingredient['amount'] < 1:
                 raise serializers.ValidationError(
                     'Количество ингредиентов не менее 1')
+            if ingredient['amount'] > 6400:
+                raise serializers.ValidationError(
+                    'Ингредиентов слишком много')
             ingredients_set.append(ingredient['id'])
         return value
 
@@ -202,6 +205,9 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.ValidationError(
                 'Время приготовления не менее 1 минуты')
+        if value > 1440:
+            raise serializers.ValidationError(
+                'Время приготовления не более суток')
         return value
 
     def add_recipe_ingredients(self, ingredients, recipe):
