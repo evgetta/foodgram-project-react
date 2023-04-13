@@ -9,3 +9,4 @@ def is_hex_validator(color):
         raise ValidationError(
             'Неправильный hex-код цвета'
         )
+    return '#' + color
